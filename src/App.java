@@ -1,6 +1,13 @@
+import java.util.List;
+
+import models.Cell;
+import models.Maze;
+import models.MazeSolverRecursivo;
+
 public class App {
     public static void main(String[] args) {
-        runEjerciciosPD();
+        // runEjerciciosPD();
+        runMaze();
     }
 
     private static void runEjerciciosPD() {
@@ -8,16 +15,52 @@ public class App {
 
         System.out.println("Fibonacci Recursivo");
         long start = System.nanoTime();
-        int resultado = ejerciciosPD.getFibonacci(50); 
+        int resultado = ejerciciosPD.getFibonacci(50);
         long end = System.nanoTime();
-        double duration = (end - start) / 1_000_000_000.0; 
+        double duration = (end - start) / 1_000_000_000.0;
         System.out.println("Resultado = " + resultado + " en tiempo " + duration + " segundos");
 
         System.out.println("Fibonacci con Programación Dinámica");
         long start2 = System.nanoTime();
-        int resultado2 = ejerciciosPD.getFibonacciPD(50); 
+        int resultado2 = ejerciciosPD.getFibonacciPD(50);
         long end2 = System.nanoTime();
-        double duration2 = (end2 - start2) / 1_000_000_000.0; 
+        double duration2 = (end2 - start2) / 1_000_000_000.0;
         System.out.printf("Resultado = %d en tiempo %.6f segundos\n", resultado2, duration2);
     }
-}
+
+    private static void runMaze() {
+        boolean[][] predefinedMaze = {
+                { true, true, true, true },
+                { false, true, true, true },
+                { true, true, false, false },
+                { true, true, true, true },
+    };
+    //Clase MAZE con variable global prefinedMaze
+    Maze maze = new Maze(predefinedMaze);
+
+    System.out.println("Laberinto cargado:");
+    maze.printMaze();
+
+
+        Cell start = new Cell(0, 0);
+        Cell end = new Cell(3, 3);
+
+        MazeSolverRecursivo solver = new MazeSolverRecursivo();
+        List<Cell> path = solver.getPath(predefinedMaze, start, end);
+
+        if (path != null) {
+            System.out.println("Camino encontrado:");
+            for (Cell cell : path) {
+                System.out.print(cell + " ");
+            }
+            System.out.println();
+        } else {
+            System.out.println("No se encontró un camino.");
+        }
+        //YA esta camino abajo derecha Es decor MAzeSolverREcursivo
+        // HAcer MazesolverREcursivoCOmpleto es decir tambien abajo ya arriba
+    }
+    }
+    
+
+
