@@ -1,39 +1,33 @@
 package models;
 
-import java.util.Objects;
-
 public class Cell {
-    private int row;
-    private int col;
-
-    public Cell(int row, int col) {
-        this.row = row;
-        this.col = col;
+    int fila;
+    int columna;
+    public Cell(int fila, int columna) {
+        this.fila = fila;
+        this.columna = columna;
     }
 
-    public int getRow() {
-        return row;
+    public int getFila() {
+        return fila;
     }
 
-    public int getCol() {
-        return col;
+    public void setFila(int fila) {
+        this.fila = fila;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof Cell)) return false;
-        Cell other = (Cell) obj;
-        return row == other.row && col == other.col;
+    public int getColumna() {
+        return columna;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(row, col);
+    public void setColumna(int columna) {
+        this.columna = columna;
     }
 
-    @Override
-    public String toString() {
-        return "(" + row + ", " + col + ")";
-    }
+@Override
+public String toString() {
+    return "(" + fila + "," + columna + ")";
+}
+
+
 }

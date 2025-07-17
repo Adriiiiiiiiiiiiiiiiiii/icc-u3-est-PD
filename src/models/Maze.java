@@ -1,28 +1,34 @@
 package models;
-
-import java.util.List;
-
 public class Maze {
-    private boolean[][] predefinedMaze;
+    private boolean [][] grid;
 
-    public Maze(boolean[][] predefinedMaze) {
-        this.predefinedMaze = predefinedMaze;
+    public Maze(boolean[][] grid) {
+        this.grid = grid;
     }
 
     public void printMaze() {
-        for (int i = 0; i < predefinedMaze.length; i++) {
-            for (int j = 0; j < predefinedMaze[i].length; j++) {
-                System.out.print(predefinedMaze[i][j] ? "-" : "*");
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if (grid[i][j] == true) System.out.print(" - ");
+                else System.out.print(" * ");
             }
             System.out.println();
         }
     }
 
-    public boolean[][] getMaze() {
-        return predefinedMaze;
+    public boolean[][] getGrid() {
+        return grid;
     }
 
-    public interface MazeSolver {
-        List<Cell> getPath(boolean[][] grid, Cell start, Cell end);
+    public void setGrid(boolean[][] grid) {
+        this.grid = grid;
+    }
+
+    public boolean[][] getMaze() {
+        return grid;
+    }
+
+    public void setMaze(boolean[][] grid) {
+        this.grid = grid;
     }
 }

@@ -3,6 +3,7 @@ import java.util.List;
 import models.Cell;
 import models.Maze;
 import models.MazeSolverRecursivo;
+import models.MazeSolverRecursivoCompleto;
 
 public class App {
     public static void main(String[] args) {
@@ -30,37 +31,48 @@ public class App {
 
     private static void runMaze() {
         boolean[][] predefinedMaze = {
-                { true, true, true, true },
-                { false, true, true, true },
-                { true, true, false, false },
-                { true, true, true, true },
-    };
-    //Clase MAZE con variable global prefinedMaze
-    Maze maze = new Maze(predefinedMaze);
+            { true,  true,  true,  true },
+            { false, true,  true,  true },
+            { true,  true,  false, false },
+            { true,  true,  true,  true },
+        };
 
-    System.out.println("Laberinto cargado:");
-    maze.printMaze();
-
+        Maze maze = new Maze(predefinedMaze);
+        System.out.println("Laberinto cargado:");
+        maze.printMaze();
 
         Cell start = new Cell(0, 0);
-        Cell end = new Cell(3, 3);
+        Cell end   = new Cell(3, 3);
 
-        MazeSolverRecursivo solver = new MazeSolverRecursivo();
-        List<Cell> path = solver.getPath(predefinedMaze, start, end);
+        // Usando el solver recursivo simple (derecha y abajo)
+        MazeSolverRecursivo simpleSolver = new MazeSolverRecursivo();
+        List<Cell> path = simpleSolver.getPath(predefinedMaze, start, end);
 
-        if (path != null) {
-            System.out.println("Camino encontrado:");
+        if (!path.isEmpty()) {
+            System.out.println("Camino encontrado (simple):");
             for (Cell cell : path) {
                 System.out.print(cell + " ");
             }
             System.out.println();
         } else {
-            System.out.println("No se encontró un camino.");
+            System.out.println("No se encontró un camino (simple).");
         }
-        //YA esta camino abajo derecha Es decor MAzeSolverREcursivo
-        // HAcer MazesolverREcursivoCOmpleto es decir tambien abajo ya arriba
+
+        // Ahora usando el solver recursivo completo (arriba, derecha, abajo, izquierda)
+        MazeSolverRecursivoCompleto fullSolver = new MazeSolverRecursivoCompleto();
+        List<Cell> fullPath = fullSolver.getPath(predefinedMaze, start, end);
+
+        if (!fullPath.isEmpty()) {
+            System.out.println("Camino encontrado (completo):");
+            for (Cell cell : fullPath) {
+                System.out.print(cell + " ");
+            }
+            System.out.println();
+        } else {
+            System.out.println("No se encontró un camino (completo).");
+        }
     }
-    }
-    
+}
+   
 
 
